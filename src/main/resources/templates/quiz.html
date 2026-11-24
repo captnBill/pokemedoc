@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(#{app.name})}"></head>
+<body class="quiz">
+  <header class="topbar">
+    <a class="btn text" th:href="@{/}" th:text="#{back.button}">Back</a>
+  </header>
+
+  <div class="quiz-top">
+    <img class="sprite" th:if="${showSprite}" th:src="${game.current.spriteUrl}" alt="">
+
+    <!-- Medicine photo (Wikimedia Commons / Wikipedia) or a pill icon when no convincing one was found -->
+    <div class="illustration" th:if="${showMedicineArt}">
+      <img th:if="${medicineImage != null}" th:src="${medicineImage.url}" alt="">
+      <svg th:if="${medicineImage == null}" class="pill" viewBox="0 0 64 64" aria-hidden="true">
+        <g transform="rotate(-45 32 32)" stroke-width="2.5" stroke-linejoin="round">
+          <rect x="6" y="20" width="52" height="24" rx="12" fill="#ffffff" stroke="#700038"/>
+          <path d="M32 20h14a12 12 0 0 1 0 24H32z" fill="#eb348f" stroke="#700038"/>
+        </g>
+      </svg>
+      <span class="image-note" th:if="${medicineImage != null and medicineImage.diagram}"
+            th:text="#{image.diagram}">Chemical structure</span>
+      <a class="image-credit" th:if="${medicineImage != null}" th:href="${medicineImage.pageUrl}"
+         target="_blank" rel="noopener" th:text="#{image.credit}">Image via Wikimedia</a>
+    </div>
+  </div>
+
+  <main class="quiz-main">
+    <!-- Error state (Android: "Error fetching name") -->
+    <th:block th:if="${fetchError}">
+      <h1 class="name-label" th:text="#{error.fetching.name}">Error fetching name</h1>
+      <a class="btn" th:href="@{/play}" th:text="#{retry.button}">Try again</a>
+    </th:block>
+
+    <th:block th:unless="${fetchError}">
+      <h1 class="name-label" th:text="${game.current.name}">Name</h1>
+      <p class="description"
+         th:text="#{${descKey}(${game.current.name},${game.current.types})}">Is this a Pokémon or Medicine?</p>
+
+      <form class="buttons" th:action="@{/play/guess}" method="post">
+        <button type="submit" name="answer" value="pokemon" class="btn guess"
+                th:classappend="${pokemonClass}" th:disabled="${revealed}"
+                th:text="#{pokemon.button}">Pokémon</button>
+        <button type="submit" name="answer" value="medicine" class="btn guess"
+                th:classappend="${medicineClass}" th:disabled="${revealed}"
+                th:text="#{medicine.button}">Medicine</button>
+      </form>
+
+      <div class="lives">
+        <th:block th:each="i : ${#numbers.sequence(1, 3)}">
+          <th:block th:replace="~{fragments :: heart(${i le game.lives})}"></th:block>
+        </th:block>
+      </div>
+
+      <form class="next-form" th:classappend="${!revealed} ? 'invisible'" th:action="@{/play/next}" method="post">
+        <button type="submit" class="btn" th:text="#{next.button}">Next</button>
+      </form>
+    </th:block>
+  </main>
+
+  <p class="score" th:if="${!fetchError}" th:text="#{score(${game.score})}">Score: 0</p>
+</body>
+</html>

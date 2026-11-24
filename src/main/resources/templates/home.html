@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head(#{app.name})}"></head>
+<body class="home">
+  <header class="topbar">
+    <div class="account">
+      <th:block sec:authorize="isAuthenticated()">
+        <span th:text="#{auth.hello(${#authentication.name})}">Hello</span>
+        <form th:action="@{/logout}" method="post">
+          <button type="submit" class="btn text" th:text="#{auth.logout}">Log out</button>
+        </form>
+      </th:block>
+      <th:block sec:authorize="!isAuthenticated()">
+        <a class="btn text" th:href="@{/login}" th:text="#{auth.login}">Log in</a>
+        <a class="btn text" th:href="@{/register}" th:text="#{auth.register}">Register</a>
+      </th:block>
+    </div>
+    <a class="btn" th:href="@{/preferences}" th:text="#{preferences.button}">Preferences</a>
+  </header>
+
+  <div class="flash" th:if="${savedScore != null}" th:text="#{score.saved(${savedScore})}">Score saved</div>
+
+  <main class="center">
+    <img class="title-img" th:src="@{/img/miriam.png}" alt="Nurse Miriam">
+    <a class="btn" th:href="@{/play/new}" th:text="#{start.button}">Start</a>
+  </main>
+
+  <footer class="bottombar">
+    <a class="btn" th:href="@{/credits}" th:text="#{credits.button}">Credits</a>
+    <a class="btn" th:href="@{/leaderboard}" th:text="#{leaderboard.button}">Leaderboard</a>
+  </footer>
+</body>
+</html>

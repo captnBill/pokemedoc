@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(#{preferences.button})}"></head>
+<body class="prefs">
+  <header class="topbar">
+    <a class="btn" th:href="@{/}" th:text="#{back.button}">Back</a>
+  </header>
+  <h1 th:text="#{preferences.button}">Preferences</h1>
+
+  <!-- Theme: sun - switch - moon -->
+  <div class="switch-row" th:title="#{theme.switch}">
+    <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.76,4.84l-1.8,-1.79 -1.41,1.41 1.79,1.79 1.42,-1.41zM4,10.5L1,10.5v2h3v-2zM13,0.55h-2L11,3.5h2L13,0.55zM20.45,4.46l-1.41,-1.41 -1.79,1.79 1.41,1.41 1.79,-1.79zM17.24,18.16l1.79,1.8 1.41,-1.41 -1.8,-1.79 -1.4,1.4zM20,10.5v2h3v-2h-3zM12,5.5c-3.31,0 -6,2.69 -6,6s2.69,6 6,6 6,-2.69 6,-6 -2.69,-6 -6,-6zM11,22.45h2L13,19.5h-2v2.95zM3.55,18.54l1.41,1.41 1.79,-1.8 -1.41,-1.41 -1.79,1.8z"/></svg>
+    <label class="switch">
+      <input type="checkbox" id="themeSwitch" th:attr="aria-label=#{theme.switch}">
+      <span class="slider"></span>
+    </label>
+    <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14,2c1.82,0 3.53,0.5 5,1.35C16.01,5.08 14,8.3 14,12s2.01,6.92 5,8.65C17.53,21.5 15.82,22 14,22C8.48,22 4,17.52 4,12S8.48,2 14,2z"/></svg>
+  </div>
+
+  <!-- Language: EN flag - switch - FR flag (checked = French) -->
+  <div class="switch-row" th:title="#{language.switch}">
+    <img th:src="@{/img/en_flag.png}" alt="English">
+    <label class="switch">
+      <input type="checkbox" id="languageSwitch"
+             th:checked="${#locale.language == 'fr'}"
+             th:attr="data-url=@{/preferences},aria-label=#{language.switch}">
+      <span class="slider"></span>
+    </label>
+    <img th:src="@{/img/fr_flag.png}" alt="Français">
+  </div>
+  <p class="form-page">
+    <span class="alt" th:text="#{language.notice}">Note that due to API restrictions, the language switch only affects the UI elements. Pokemon and medicine names will still be in English.</span>
+  </p>
+</body>
+</html>

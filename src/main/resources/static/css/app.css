@@ -1,0 +1,147 @@
+/* Colours follow the Android app's Material 3 DayNight theme. */
+:root {
+  --bg: #FFFBFE;
+  --fg: #1C1B1F;
+  --primary: #6750A4;
+  --on-primary: #FFFFFF;
+  --guess-bg: #444444;      /* Color.DKGRAY */
+  --guess-fg: #FFFFFF;
+  --even-row: #e9d6ff;
+  --link: #0099cc;          /* holo_blue_dark */
+  --border: #cac4d0;
+}
+:root[data-theme="dark"] {
+  --bg: #1C1B1F;
+  --fg: #E6E1E5;
+  --primary: #D0BCFF;
+  --on-primary: #381E72;
+  --guess-bg: #CCCCCC;      /* Color.LTGRAY */
+  --guess-fg: #381E72;
+  --even-row: #2e243b;
+  --border: #49454f;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+/* ---- buttons ---- */
+.btn, button.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 24px;
+  font: 500 14px/20px Roboto, "Segoe UI", system-ui, sans-serif;
+  letter-spacing: .1px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:disabled { cursor: default; filter: none; }
+.btn.guess { background: var(--guess-bg); color: var(--guess-fg); }
+.btn.guess:disabled { opacity: .85; }
+.btn.guess.correct { background: #00FF00; }   /* Color.GREEN */
+.btn.guess.wrong   { background: #FF0000; }   /* Color.RED */
+.btn.text { background: transparent; color: var(--primary); padding: 10px 12px; }
+
+.topbar, .bottombar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.account { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 14px; }
+.account form { margin: 0; }
+.flash {
+  margin: 12px auto 0;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* ---- home ---- */
+.home .center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.title-img { width: 100%; max-width: 396px; height: auto; }
+.credit { color: var(--link); text-decoration: none; }
+.credit:hover { text-decoration: underline; }
+
+/* ---- quiz ---- */
+.quiz-top { height: 400px; flex: 0 0 400px; display: flex; justify-content: center; align-items: flex-start; padding-top: 8px; }
+.sprite { width: 384px; height: 384px; image-rendering: pixelated; }
+.illustration { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.illustration img { max-width: 384px; max-height: 384px; object-fit: contain; background: #fff; border-radius: 12px; }
+.illustration .pill { width: 192px; height: 192px; }
+.image-note { font-size: 12px; opacity: .8; }
+.image-credit { font-size: 11px; color: var(--link); text-decoration: none; opacity: .85; }
+.image-credit:hover { text-decoration: underline; }
+.quiz-main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
+.name-label { font-size: 24px; font-weight: bold; margin: 0; }
+.description { font-size: 16px; margin: 0; min-height: 1.5em; }
+.buttons { display: flex; gap: 16px; justify-content: center; margin: 16px 0 8px; }
+.lives { display: flex; gap: 16px; justify-content: center; }
+.heart { width: 50px; height: 50px; }
+.heart-full path  { fill: #eb348f; stroke: #700038; stroke-width: 1; }
+.heart-empty path { fill: #202020; stroke: #404040; stroke-width: 1; }
+.next-form { margin-top: 8px; }
+.invisible { visibility: hidden; }
+.score { text-align: center; font-size: 18px; margin: 16px 0 0; }
+
+/* ---- leaderboard ---- */
+.board h1, .prefs h1, .form-page h1 { text-align: center; font-size: 24px; margin: 16px 0; }
+table.scores { width: 100%; max-width: 640px; margin: 0 auto; border-collapse: collapse; }
+table.scores th, table.scores td { padding: 8px; text-align: center; }
+table.scores td.num { font-weight: bold; }
+table.scores tr.even-row { background: var(--even-row); }
+
+/* ---- preferences ---- */
+.switch-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 24px 0; }
+.switch-row img, .switch-row svg { width: 24px; height: 24px; }
+.sun path  { fill: #282828; }
+.moon path { fill: #D1D1D1; }
+.switch { position: relative; display: inline-block; width: 52px; height: 28px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; inset: 0; background: #79747e; border-radius: 28px; cursor: pointer; transition: .15s; }
+.slider::before { content: ""; position: absolute; width: 20px; height: 20px; left: 4px; top: 4px; background: #fff; border-radius: 50%; transition: .15s; }
+.switch input:checked + .slider { background: var(--primary); }
+.switch input:checked + .slider::before { transform: translateX(24px); background: var(--on-primary); }
+.switch input:focus-visible + .slider { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* ---- login / register ---- */
+.form-page { width: 100%; max-width: 360px; margin: 0 auto; }
+.form-page form { display: flex; flex-direction: column; gap: 14px; }
+.form-page label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.form-page input {
+  padding: 10px 12px; font-size: 16px; border-radius: 8px;
+  border: 1px solid var(--border); background: transparent; color: var(--fg);
+}
+.form-page .hint { font-size: 13px; opacity: .75; margin: 0; }
+.form-page .alt { text-align: center; font-size: 14px; }
+.form-page .alt a { color: var(--link); }
+.notice { padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; margin: 0 0 12px; font-size: 14px; }
+.notice.error { border-color: #b3261e; color: #b3261e; }
+:root[data-theme="dark"] .notice.error { border-color: #f2b8b5; color: #f2b8b5; }
+
+/* ---- credits page ---- */
+.credits-page { max-width: 480px; }
+.credit-line { font-size: 16px; margin: 0 0 12px; }
+.credits-disclaimer { margin-top: 24px; text-align: center; line-height: 1.5; }
+.credit-line a:hover { text-decoration: underline; }

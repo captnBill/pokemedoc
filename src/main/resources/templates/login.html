@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(#{login.title})}"></head>
+<body>
+  <header class="topbar">
+    <a class="btn" th:href="@{/}" th:text="#{back.button}">Back</a>
+  </header>
+  <main class="form-page">
+    <h1 th:text="#{login.title}">Log in</h1>
+    <p class="notice" th:if="${param.registered}" th:text="#{login.registered}">Account created!</p>
+    <p class="notice" th:if="${param.logout}" th:text="#{login.loggedout}">Logged out.</p>
+    <p class="notice error" th:if="${param.error}" th:text="#{login.error}">Wrong username or password.</p>
+    <form th:action="@{/login}" method="post">
+      <label><span th:text="#{login.username}">Username</span>
+        <input type="text" name="username" autocomplete="username" required autofocus></label>
+      <label><span th:text="#{login.password}">Password</span>
+        <input type="password" name="password" autocomplete="current-password" required></label>
+      <button type="submit" class="btn" th:text="#{login.button}">Log in</button>
+    </form>
+    <p class="alt"><span th:text="#{login.noaccount}">No account yet?</span>
+      <a th:href="@{/register}" th:text="#{auth.register}">Register</a></p>
+  </main>
+</body>
+</html>

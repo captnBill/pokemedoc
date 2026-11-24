@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(#{leaderboard.button})}"></head>
+<body class="board">
+  <header class="topbar">
+    <a class="btn" th:href="@{/}" th:text="#{back.button}">Back</a>
+  </header>
+  <h1 th:text="#{leaderboard.button}">Leaderboard</h1>
+  <table class="scores">
+    <thead>
+      <tr>
+        <th th:text="#{leaderboard.username}">Username</th>
+        <th th:text="#{leaderboard.score}">Score</th>
+        <th th:text="#{leaderboard.date}">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="s, st : ${scores}" th:classappend="${st.index % 2 == 0} ? 'even-row'">
+        <td th:text="${s.username}">Nurse Miriam</td>
+        <td class="num" th:text="${s.score}">100</td>
+        <td th:text="${s.playedOn}">2024-11-07</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

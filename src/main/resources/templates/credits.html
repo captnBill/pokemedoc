@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(#{credits.main})}"></head>
+<body class="credits">
+<header class="topbar">
+    <a class="btn" th:href="@{/}" th:text="#{back.button}">Back</a>
+</header>
+
+<main class="form-page credits-page">
+    <h1 th:text="#{credits.main}">Pokémedoc by captn Bill</h1>
+
+    <p class="alt credit-line">
+        <span th:text="#{credits.pokeapi.text}">Pokemon data API provided by</span>
+        <a href="https://pokeapi.co" target="_blank" rel="noopener" th:text="#{credits.pokeapi}">PokeAPI</a>
+    </p>
+
+    <p class="alt credit-line">
+        <span th:text="#{credits.rxterms.text}">Medicine data API provided by</span>
+        <a href="https://www.nlm.nih.gov/research/umls/rxnorm/index.html" target="_blank" rel="noopener" th:text="#{credits.rxterms}">RxNorm</a>
+    </p>
+
+    <p class="alt credit-line">
+        <span th:text="#{credits.wikimedia.text}">Medicine images provided by</span>
+        <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank" rel="noopener" th:text="#{credits.wikimedia}">Wikimedia</a>
+    </p>
+
+    <p class="alt credit-line">
+        <span th:text="#{credits.artist.text}">Title screen art by</span>
+        <a href="https://x.com/makkusuoko/status/1601873128300216321" target="_blank" rel="noopener" th:text="#{credits.artist}">Mカエル</a>
+    </p>
+
+    <p class="hint credits-disclaimer" th:text="#{credits.general}">
+        This is a non-profit hobby project made for fun. All rights belong to their original owners.
+        I am not affiliated with Pokémon or any brand that could show up during the quiz.
+    </p>
+</main>
+</body>
+</html>
