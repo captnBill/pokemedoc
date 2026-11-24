@@ -1,13 +1,12 @@
-/* Colours follow the Android app's Material 3 DayNight theme. */
 :root {
   --bg: #FFFBFE;
   --fg: #1C1B1F;
   --primary: #6750A4;
   --on-primary: #FFFFFF;
-  --guess-bg: #444444;      /* Color.DKGRAY */
+  --guess-bg: #444444;
   --guess-fg: #FFFFFF;
   --even-row: #e9d6ff;
-  --link: #0099cc;          /* holo_blue_dark */
+  --link: #0099cc;
   --border: #cac4d0;
 }
 :root[data-theme="dark"] {
@@ -15,7 +14,7 @@
   --fg: #E6E1E5;
   --primary: #D0BCFF;
   --on-primary: #381E72;
-  --guess-bg: #CCCCCC;      /* Color.LTGRAY */
+  --guess-bg: #CCCCCC;
   --guess-fg: #381E72;
   --even-row: #2e243b;
   --border: #49454f;
@@ -27,7 +26,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -51,8 +50,8 @@ body {
 .btn:disabled { cursor: default; filter: none; }
 .btn.guess { background: var(--guess-bg); color: var(--guess-fg); }
 .btn.guess:disabled { opacity: .85; }
-.btn.guess.correct { background: #00FF00; }   /* Color.GREEN */
-.btn.guess.wrong   { background: #FF0000; }   /* Color.RED */
+.btn.guess.correct { background: #00FF00; }
+.btn.guess.wrong   { background: #FF0000; }
 .btn.text { background: transparent; color: var(--primary); padding: 10px 12px; }
 
 .topbar, .bottombar {
@@ -85,11 +84,11 @@ body {
 .credit:hover { text-decoration: underline; }
 
 /* ---- quiz ---- */
-.quiz-top { height: 400px; flex: 0 0 400px; display: flex; justify-content: center; align-items: flex-start; padding-top: 8px; }
-.sprite { width: 384px; height: 384px; image-rendering: pixelated; }
+.quiz-top { height: 40vh; flex: 0 0 40vh; display: flex; justify-content: center; align-items: flex-start; padding-top: 8px; }
+.sprite { width: 35vh; height: 35vh; image-rendering: pixelated; }
 .illustration { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.illustration img { max-width: 384px; max-height: 384px; object-fit: contain; background: #fff; border-radius: 12px; }
-.illustration .pill { width: 192px; height: 192px; }
+.illustration img { max-width: 60vw; max-height: 35vh; object-fit: contain; background: #fff; border-radius: 12px; }
+.illustration .pill { width: 25vh; height: 25vh; }
 .image-note { font-size: 12px; opacity: .8; }
 .image-credit { font-size: 11px; color: var(--link); text-decoration: none; opacity: .85; }
 .image-credit:hover { text-decoration: underline; }
