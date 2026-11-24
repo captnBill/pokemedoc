@@ -20,3 +20,19 @@
     });
   }
 })();
+
+// custom quit dialog
+(function () {
+  var backButton = document.getElementById('backButton');
+  var dialog = document.getElementById('quitDialog');
+  if (!backButton || !dialog || typeof dialog.showModal !== 'function') { return; }
+
+  backButton.addEventListener('click', function (event) {
+    if (backButton.getAttribute('data-confirm') === 'true') {
+      event.preventDefault();
+      dialog.showModal();
+    }
+  });
+  document.getElementById('quitCancel').addEventListener('click', function () { dialog.close(); });
+  dialog.addEventListener('click', function (event) { if (event.target === dialog) { dialog.close(); } });
+})();

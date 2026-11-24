@@ -69,4 +69,16 @@ class GameStateTest {
         assertTrue(g.recentlyAsked("Name1"));
         assertTrue(g.recentlyAsked("Name100"));
     }
+
+    @Test
+    void hasAnsweredAnyIsFalseOnlyBeforeTheFirstAnswer() {
+        GameState g = new GameState();
+        assertFalse(g.hasAnsweredAny());
+
+        g.setCurrent(new Question(true, "Name", "", null));
+        assertFalse(g.hasAnsweredAny());   // a question is shown but not answered yet
+
+        g.guess(false);                    // wrong answer: score 0, but the game has started
+        assertTrue(g.hasAnsweredAny());
+    }
 }

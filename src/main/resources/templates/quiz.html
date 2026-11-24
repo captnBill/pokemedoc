@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments :: head(#{app.name})}"></head>
+
+<dialog id="quitDialog" class="dialog" aria-labelledby="quitTitle">
+  <div class="dialog-body">
+    <h2 id="quitTitle" class="dialog-title" th:text="#{quit.title}">Quit the game?</h2>
+    <p class="dialog-text" th:text="#{quit.confirm}">Are you sure you want to quit? Your score will be registered.</p>
+    <div class="dialog-actions">
+      <button type="button" id="quitCancel" class="btn text" th:text="#{quit.cancel}">Keep playing</button>
+      <button type="submit" form="quitForm" class="btn" th:text="#{quit.ok}">Quit</button>
+    </div>
+  </div>
+</dialog>
+
 <body class="quiz">
   <header class="topbar">
-    <a class="btn text" th:href="@{/}" th:text="#{back.button}">Back</a>
+    <form id="quitForm" th:action="@{/play/quit}" method="post">
+      <button type="submit" id="backButton" class="btn text"
+              th:attr="data-confirm=${game.hasAnsweredAny()}"
+              th:text="#{back.button}">Back</button>
+    </form>
   </header>
 
   <div class="quiz-top">

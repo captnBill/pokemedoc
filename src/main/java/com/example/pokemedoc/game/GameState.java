@@ -87,4 +87,8 @@ public class GameState implements Serializable {
             remember(current.name());
         }
     }
+
+    public boolean hasAnsweredAny() {
+        return score > 0 || lives < STARTING_LIVES;
+    }
 }

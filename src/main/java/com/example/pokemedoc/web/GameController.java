@@ -104,7 +104,6 @@ public class GameController {
             return "redirect:/play";
         }
         if (game.isGameOver()) {
-            // Android: "Next" after Game Over -> name dialog -> save -> back to the main screen.
             scores.save(principal.getName(), game.getScore());
             session.removeAttribute(SESSION_KEY);
             redirect.addFlashAttribute("savedScore", game.getScore());
@@ -112,6 +111,20 @@ public class GameController {
         }
         game.advance();
         return "redirect:/play";
+    }
+
+    @PostMapping("/quit")
+    public String quit(HttpSession session, Principal principal, RedirectAttributes redirect) {
+        GameState game = (GameState) session.getAttribute(SESSION_KEY);
+        if (game == null) {
+            return "redirect:/";
+        }
+        session.removeAttribute(SESSION_KEY);       // also prevents saving the same game twice
+        if (game.hasAnsweredAny()) {
+            scores.save(principal.getName(), game.getScore());
+            redirect.addFlashAttribute("savedScore", game.getScore());
+        }
+        return "redirect:/";
     }
 
     /** Message key for the line under the name (same texts and same "Game Over!" override as the app). */

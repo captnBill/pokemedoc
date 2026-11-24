@@ -8,6 +8,7 @@
   --even-row: #e9d6ff;
   --link: #0099cc;
   --border: #cac4d0;
+  --dialog-bg: #ECE6F0;
 }
 :root[data-theme="dark"] {
   --bg: #1C1B1F;
@@ -18,6 +19,7 @@
   --guess-fg: #381E72;
   --even-row: #2e243b;
   --border: #49454f;
+  --dialog-bg: #2B2930;
 }
 
 * { box-sizing: border-box; }
@@ -144,3 +146,19 @@ table.scores tr.even-row { background: var(--even-row); }
 .credit-line { font-size: 16px; margin: 0 0 12px; }
 .credits-disclaimer { margin-top: 24px; text-align: center; line-height: 1.5; }
 .credit-line a:hover { text-decoration: underline; }
+
+/* ---- dialog ---- */
+.dialog {
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 0;
+  background: var(--dialog-bg);
+  color: var(--fg);
+  width: min(90vw, 360px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .35);
+}
+.dialog::backdrop { background: rgba(0, 0, 0, .45); }
+.dialog-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.dialog-title { margin: 0; font-size: 24px; font-weight: 400; }
+.dialog-text { margin: 0; font-size: 14px; line-height: 1.5; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
