@@ -18,7 +18,8 @@ public final class NameFormatter {
     private static final Set<String> POKEMON_SUFFIX_EXCEPTIONS = Set.of(
             "oh", "o", "z", "tusk", "tail", "bonnet", "mane", "wing", "shocks",
             "moon", "wake", "fire", "bolt", "mime", "rime", "jr",
-            "lu","chien","pao","yu");
+            "lu","chien","pao","yu",
+            "null");
 
     private static final Pattern PARENTHESES = Pattern.compile("\\s*\\(.*?\\)\\s*");
 
